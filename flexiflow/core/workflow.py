@@ -14,9 +14,9 @@ class WorkflowManager:
         self.tools = tools
         self.agents: Dict[str, Agent] = {}
 
-    def add_agent(self, config: AgentConfig) -> None:
+    def add_agent(self, config: AgentConfig, ai_provider=None) -> None:
         """Register an agent."""
-        self.agents[config.name] = Agent(config, self.memory, self.tools)
+        self.agents[config.name] = Agent(config, self.memory, self.tools, ai_provider)
 
     def add_task(self, task: Task) -> None:
         """Add a task to the workflow graph."""

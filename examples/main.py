@@ -1,6 +1,11 @@
+from typing_extensions import override
 from flexiflow import FlexiFlow
 from flexiflow.models.base import AgentConfig, Task
+from flexiflow.ai.providers import OpenAIProvider, GroqProvider
 from flexiflow.core.workflow import WorkflowManager
+import os
+from dotenv import load_dotenv
+load_dotenv(override=True)
 
 def demo_graph_based_mode(flexiflow: FlexiFlow, city: str) -> None:
     """Demonstrate graph-based mode with dependent tasks."""
@@ -45,7 +50,7 @@ def demo_event_driven_mode(flexiflow: FlexiFlow, cities: list) -> None:
             id=f"fetch_weather_{i}",
             agent_name="fetcher",
             description=f"Fetch weather data for {city}",
-            dependencies=[]  # Independent tasks
+            dependencies=[]
         )
         flexiflow.add_task(task)
 
@@ -55,8 +60,13 @@ def demo_event_driven_mode(flexiflow: FlexiFlow, cities: list) -> None:
         print(f"Result for {city}: {result}")
 
 def main():
-    # Initialize FlexiFlow
-    flexiflow = FlexiFlow()
+    # Initialize AI provider (choose one)
+    ai_provider = OpenAIProvider(api_key=os.getenv("OPENAI_API_KEY"))
+    # or
+    # ai_provider = GroqProvider(api_key="your-groq-key")
+
+    # Initialize FlexiFlow with AI provider
+    flexiflow = FlexiFlow(ai_provider=ai_provider)
 
     # Demo graph-based mode (single city with dependencies)
     demo_graph_based_mode(flexiflow, city="New York")

@@ -46,4 +46,4 @@ pip install -e .
 ```
 
 # Work in progress
--
+- Adding Intelligence
