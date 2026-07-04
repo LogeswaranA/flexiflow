@@ -1,6 +1,6 @@
 [project]
 name = "flexiflow"
-version = "0.1.0"
+version = "0.1.1"
 description = "A hybrid agentic framework for scalable, multimodal AI systems."
 authors = [{ name = "Your Name", email = "your.email@example.com" }]
 license = { text = "MIT" }
