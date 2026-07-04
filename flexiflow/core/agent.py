@@ -23,11 +23,9 @@ class Agent:
             data = self.memory.read(f"{task.dependencies[0]}_result")
             if data:
                 if self.ai_provider:
-                    print("i am in if")
                     # Use AI provider for summarization
                     summary = self.ai_provider.generate_summary(data)
                 else:
-                    print("i am in else")
                     # Fallback to basic summarization
                     summary = f"Weather in {data['city']}: {data['temp']}°C, {data['condition']}."
                 self.memory.write(f"{task.id}_result", summary)
